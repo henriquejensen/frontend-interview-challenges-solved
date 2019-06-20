@@ -1,0 +1,2 @@
+const NUMBER_OF_POINTS = 3;
+const CIRCLE_DIAMETER = 11

@@ -1,6 +1,30 @@
 body {
     display: flex;
-    justify-content: center;
+    align-items: center;
     background-color: grey;
-    margin-top: 30px
+    margin-top: 30px;
+    flex-direction: column
+}
+
+button {
+    color: white;
+    border-radius: 5px;
+    padding: 5px 15px;
+}
+
+#controls {
+    display: flex;
+    justify-content: space-around;
+    width: 500px;
+    margin-bottom: 20px;
+}
+
+#controls__button--green {
+    background: green;
+    border-color: green;
+}
+
+#controls__button--red {
+    background: red;
+    border-color: red;
 }
