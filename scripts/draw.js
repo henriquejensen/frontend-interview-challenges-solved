@@ -27,12 +27,15 @@ window.onload = () => {
         if (arrayOfPoints.length === 3) {
             const [p1,p2, p3] = [...arrayOfPoints];
             const p4 = newVertice(medianPoint(p1, p3), p2);
+            const center = medianPoint(p1, p3);
 
+            drawCircle(context, p4.x, p4.y);
             drawCircle(context, p4.x, p4.y);
             drawLine(context, p1, p2);
             drawLine(context, p2, p3);
             drawLine(context, p3, p4);
             drawLine(context, p4, p1);
+            drawCircunference(context, center, diameterCircunference(areaParalellogram(p1, p2, p3)));
         }
     }
 
