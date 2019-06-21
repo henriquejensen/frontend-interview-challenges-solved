@@ -28,3 +28,27 @@ button {
     background: red;
     border-color: red;
 }
+
+#content {
+    display: flex;
+}
+
+#information {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    width: 200px
+}
+
+#information h3 {
+    text-align: center
+}
+
+#information div {
+    padding: 5px;
+}
+
+#information span {
+    color: red;
+    font-weight: bold
+}

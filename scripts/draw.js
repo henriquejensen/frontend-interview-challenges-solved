@@ -2,6 +2,7 @@ window.onload = () => {
     
     const canvas = document.getElementById("canvas");
     const context = canvas.getContext("2d");
+    let p4, paralellogramArea, circleDiameter;
     let arrayOfPoints = [];
     const CONTAINER = {
         x: 0,
@@ -26,17 +27,20 @@ window.onload = () => {
 
         if (arrayOfPoints.length === 3) {
             const [p1,p2, p3] = [...arrayOfPoints];
-            const p4 = newVertice(medianPoint(p1, p3), p2);
+            p4 = newVertice(medianPoint(p1, p3), p2);
+            paralellogramArea = areaParalellogram(p1, p2, p3);
+            circleDiameter = diameterCircunference(paralellogramArea);
             const center = medianPoint(p1, p3);
 
-            drawCircle(context, p4.x, p4.y);
             drawCircle(context, p4.x, p4.y);
             drawLine(context, p1, p2);
             drawLine(context, p2, p3);
             drawLine(context, p3, p4);
             drawLine(context, p4, p1);
-            drawCircunference(context, center, diameterCircunference(areaParalellogram(p1, p2, p3)));
+            drawCircunference(context, center, circleDiameter);
         }
+
+        printInformation();
     }
 
     function initScreen() {
@@ -47,10 +51,32 @@ window.onload = () => {
     function resetScreen() {
         initScreen();
         arrayOfPoints = [];
+        paralellogramArea = 0;
+        circleDiameter = 0;
+        p4 = 0;
+        point1.innerHTML = '';
+        point2.innerHTML = '';
+        point3.innerHTML = '';
+        point4.innerHTML = '';
+        paralellogram.innerHTML = '';
+        circleArea.innerHTML = '';
     }
 
-    initScreen();
+    function printInformation() {
+        const [p1,p2, p3] = [...arrayOfPoints];
+        const text = ((point, number) =>
+            point ? `<span>Point ${number}:</span> x: ${floatFixed(point.x)}, y: ${floatFixed(point.y)} ` : '');
 
+        point1.innerHTML = text(p1, 1);
+        point2.innerHTML = text(p2, 2);
+        point3.innerHTML = text(p3, 3);
+        point4.innerHTML = text(p4, 4);
+        paralellogram.innerHTML = paralellogramArea ? `<span>Area Paralellogram:</span> ${floatFixed(paralellogramArea)}` : '';
+        circleArea.innerHTML = circleDiameter ? `<span>Area Circle:</span> ${floatFixed(circleDiameter)}` : '';
+    }
+
+
+    initScreen();
 
     const resetButton = document.getElementById('controls__button--red');
     resetButton.addEventListener('click', resetScreen, false);

@@ -27,3 +27,7 @@ function diameterCircunference(area) {
     const diameter = Math.sqrt(area / Math.PI);
     return diameter;
 }
+
+function floatFixed(number) {
+    return parseFloat(number).toFixed(2);
+}
