@@ -2,7 +2,7 @@ window.onload = () => {
     
     const canvas = document.getElementById("canvas");
     const context = canvas.getContext("2d");
-    let p4, paralellogramArea, circleDiameter;
+    let p4, paralellogramArea, circleDiameter, circleCenter;
     let arrayOfPoints = [];
     const CONTAINER = {
         x: 0,
@@ -26,18 +26,15 @@ window.onload = () => {
         arrayOfPoints.map(({ x , y }) => drawCircle(context, x, y));
 
         if (arrayOfPoints.length === 3) {
-            const [p1,p2, p3] = [...arrayOfPoints];
-            p4 = newVertice(medianPoint(p1, p3), p2);
-            paralellogramArea = areaParalellogram(p1, p2, p3);
-            circleDiameter = diameterCircunference(paralellogramArea);
-            const center = medianPoint(p1, p3);
 
-            drawCircle(context, p4.x, p4.y);
+            const [p1,p2, p3] = [...arrayOfPoints];
+            calculatePoints();
+
             drawLine(context, p1, p2);
             drawLine(context, p2, p3);
             drawLine(context, p3, p4);
             drawLine(context, p4, p1);
-            drawCircunference(context, center, circleDiameter);
+            drawCircunference(context, circleCenter, circleDiameter);
         }
 
         printInformation();
@@ -46,6 +43,14 @@ window.onload = () => {
     function initScreen() {
         context.fillStyle = 'black';
         context.fillRect(CONTAINER.x,CONTAINER.y,CONTAINER.width,CONTAINER.height);
+    }
+
+    function calculatePoints() {
+        const [p1,p2, p3] = [...arrayOfPoints];
+        p4 = newVertice(medianPoint(p1, p3), p2);
+        paralellogramArea = areaParalellogram(p1, p2, p3);
+        circleDiameter = diameterCircunference(paralellogramArea);
+        circleCenter = medianPoint(p1, p3);
     }
 
     function resetScreen() {

@@ -4,14 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="modal.css">
     <link rel="stylesheet" href="style.css" />
     <title>Draw Geometric Shapes</title>
 </head>
 <body>
     
     <div id="controls">
-        <button id='controls__button--green'>Reorder</button>
-        <button id='controls__button--red'>Reset</button>
+        <button id='controls__button--green'>Reorder Points</button>
+        <button id='controls__button--red'>Reset Points</button>
+        <button id='controls__button--grey'>About</button>
     </div>
     
     <div id="content">
@@ -28,6 +30,25 @@
         </section>
     </div>
 
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div>
+                <h1>Javascript Test</h1>
+                <p>Author: Henrique Jensen</p>
+                <h2>Introduction</h2>
+                <p>The goal of this program is to draw a circle inside a paralellogram with 3 points that you choose.</p>
+                <h2>Program flow</h2>
+                <p>You need to click in 3 differents points of the black box inside the page. After it the program will draw a paralellogram and a circle with this 3 given points.</p>
+                <h3>Options</h3>
+                <p>The green button will permit you to reorder some point with you wish.</p>
+                <p>You can reset the screen clicking on the red button on the top.</p>
+                <p>On the left of the black box you can see the coordinates of the each point choosed and the coordinates of the last point of the paralellogram, the paralellogram area and the circle area.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="scripts/modal.js"></script>
     <script src="scripts/contants.js"></script>
     <script src="scripts/drawCircle.js"></script>
     <script src="scripts/drawLine.js"></script>
