@@ -16,6 +16,10 @@ class App extends Component {
     this.context.fillRect(CONTAINER.x,CONTAINER.y,CONTAINER.width,CONTAINER.height);
   }
 
+  handleMouseDown = (evt) => {
+    canvasController(this.context, evt);
+  }
+
   render() {
     const { innerWidth, innerHeight } = window;
 
@@ -24,7 +28,7 @@ class App extends Component {
         ref='canvas'
         width={innerWidth}
         height={innerHeight}
-        onMouseDown={(evt) => canvasController(this.context, evt)}
+        onMouseDown={this.handleMouseDown}
         // onMouseMove={(evt) => canvasController(this.context, evt)}
       />
     )
