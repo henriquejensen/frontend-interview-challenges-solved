@@ -12,3 +12,9 @@ export function redCircle(ctx, posX, posY) {
     ctx.fill();
     ctx.stroke();
 }
+
+export function yellowCircle(ctx, posX, posY, diameter) {
+    circle(ctx, posX, posY, diameter);
+    ctx.strokeStyle = 'yellow';
+    ctx.stroke();
+}

@@ -16,6 +16,29 @@ function newVertice(medianPoint, end) {
     return { x, y };
 }
 
+export function areaParalellogram(p1, p2, p3) {
+    const base = distanceVertices(p1, p2);
+    const height = distanceVertices(p2, p3);
+    const area = base * height;
+    return area;
+}
+
+export function distanceVertices(point1, point2) {
+    const calcX = Math.pow(point2.x - point1.x, 2);
+    const calcY = Math.pow(point2.y - point1.y, 2);
+    const distance = Math.sqrt(calcX + calcY);
+    return distance
+}
+
+export function diameterCircunference(area) {
+    const diameter = Math.sqrt(area / Math.PI);
+    return diameter;
+}
+
+export function circleCenter(point1, point3) {
+    return medianPoint(point1, point3);
+}
+
 export function isPointSelected(pointX, pointY, arrayPoints) {
     const verifyXorY = (vertice, point) => vertice - RED_CIRCLE_DIAMETER <= point && point <= vertice + RED_CIRCLE_DIAMETER;
     const verify = (x, y) => verifyXorY(x, pointX) && verifyXorY(y, pointY);

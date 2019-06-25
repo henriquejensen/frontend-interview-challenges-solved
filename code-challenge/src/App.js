@@ -14,15 +14,10 @@ class App extends Component {
   componentDidMount(prev) {
     this.canvas = this.refs.canvas;
     this.context = this.canvas.getContext('2d');
-    this.CONTAINER = {
-      x: 0,
-      y: 0,
-      width: this.canvas.width,
-      height: this.canvas.height
-    };
+    this.CONTAINER = { x: 0, y: 0, width: this.canvas.width, height: this.canvas.height };
   }
 
-  componentDidUpdate(prev) {
+  componentDidUpdate() {
     this.context = this.canvas.getContext('2d');
   }
 
@@ -69,7 +64,7 @@ class App extends Component {
     this.initScreen();
 
     const { points } = this.state;
-    points.map(({ x, y }) => mouseDown(this.context, points, x, y));
+    mouseDown(this.context, points);
   }
 
   render() {
