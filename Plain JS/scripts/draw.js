@@ -2,6 +2,7 @@ window.onload = () => {
     
     const canvas = document.getElementById("canvas");
     const context = canvas.getContext("2d");
+    const resetButton = document.getElementById('controls__button--red');
     let p4, paralellogramArea, circleDiameter, circleCenter;
     let arrayOfPoints = [];
     const CONTAINER = {
@@ -10,8 +11,6 @@ window.onload = () => {
         width: canvas.width,
         height: canvas.height
     };
-
-    canvas.addEventListener('click', drawCircleController);
 
     function drawCircleController({ offsetX, offsetY }) {
         if (arrayOfPoints.length < NUMBER_OF_POINTS) {
@@ -83,6 +82,6 @@ window.onload = () => {
 
     initScreen();
 
-    const resetButton = document.getElementById('controls__button--red');
+    canvas.addEventListener('click', drawCircleController);
     resetButton.addEventListener('click', resetScreen, false);
 }
