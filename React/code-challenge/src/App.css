@@ -1,3 +1,24 @@
+body {
+  background-color: grey
+}
+
 canvas {
   background-color: black
+}
+
+#container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#background {
+  position: fixed;
+  z-index: -1;
+}
+
+#button {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
 }

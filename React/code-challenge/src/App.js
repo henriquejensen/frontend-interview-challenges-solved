@@ -3,6 +3,7 @@ import { mouseDown } from '../src/containers/canvasController';
 import { isPointSelected } from '../src/helpers';
 import { NUMBER_OF_POINTS } from '../src/constants';
 import './App.css';
+import Button from './components/button';
 
 class App extends Component {
 
@@ -26,16 +27,17 @@ class App extends Component {
     this.context.fillRect(this.CONTAINER.x,this.CONTAINER.y,this.CONTAINER.width,this.CONTAINER.height);
   }
 
-  handleMouseDown = (evt) => {
-    const { clientX, clientY } = evt;
+  handleMouseDown = ({ nativeEvent }) => {
+    
+    const { offsetX: x, offsetY: y } = nativeEvent;
     const { points } = this.state;
 
     if (points.length < NUMBER_OF_POINTS) {
       this.setState({
-        points: points.concat({ x: clientX, y: clientY })
+        points: points.concat({ x, y })
       });
     } else {
-      const pointSelected = isPointSelected(clientX, clientY, points);
+      const pointSelected = isPointSelected(x, y, points);
 
       if (pointSelected !== null && pointSelected !== this.state.pointSelected) {
         this.setState({ pointSelected });
@@ -47,13 +49,14 @@ class App extends Component {
     requestAnimationFrame(this.renderCanvas);
   }
 
-  handleMouseMove = (evt) => {
-    const { clientX, clientY } = evt;
+  handleMouseMove = ({ nativeEvent }) => {
+    
+    const { offsetX: x, offsetY: y } = nativeEvent;
     const { pointSelected, points } = this.state;
 
     if (pointSelected !== null) {
       const newPoints = points.concat();
-      newPoints[pointSelected] = { x: clientX, y: clientY };
+      newPoints[pointSelected] = { x, y };
       this.setState({ points: newPoints });
     }
 
@@ -67,17 +70,39 @@ class App extends Component {
     mouseDown(this.context, points);
   }
 
+  onReset = () => {
+    this.setState({ points: [], pointSelected: null })
+    requestAnimationFrame(this.renderCanvas);
+  }
+
+  getWindowSize() {
+    return { width: 800, height: 800 }
+  }
+
   render() {
     const { innerWidth, innerHeight } = window;
 
     return (
-      <canvas
-        ref='canvas'
-        width={innerWidth}
-        height={innerHeight}
-        onMouseDown={this.handleMouseDown}
-        onMouseMove={this.handleMouseMove}
-      />
+      <div id='container'>
+        
+        <div id='background'>
+          <canvas
+            ref='canvas'
+            width={innerWidth}
+            height={innerHeight}
+            onMouseDown={this.handleMouseDown}
+            onMouseMove={this.handleMouseMove}
+          />
+        </div>
+
+        <div id='button'>
+          <Button
+            onClick={this.onReset}
+          >
+            Reset
+          </Button>
+        </div>
+      </div>
     )
   }
 }
