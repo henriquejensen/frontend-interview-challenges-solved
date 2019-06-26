@@ -1,4 +1,18 @@
 #panel-container {
     width: 300px;
-    background-color: white
+    background-color: #f0f0f0;
+    padding: 3px 5px;
+}
+
+label {
+    font-weight: bold
+}
+
+h2 {
+    text-align: center;
+    margin: 0;
+    padding: 10px;
+    background-color: #88b8e6;
+    color: white;
+
 }

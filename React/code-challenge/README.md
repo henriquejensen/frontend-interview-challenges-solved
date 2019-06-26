@@ -10,6 +10,7 @@ cantered on each selected point.
 Based on these three points, two additional shapes are drawn:
 - a blue parallelogram, having three of its corners in the points selected by the user.
 - a yellow circle, with the same area and centre of mass as the parallelogram.
+
 These shapes should not be filled.
 The coordinates of the selected points as well as the area of the parallelogram and circle
 should be presented to the user.
