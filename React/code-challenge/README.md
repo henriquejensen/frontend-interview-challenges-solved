@@ -1,4 +1,14 @@
 # JavaScript assignment
+
+# Develoment configuration
+
+You need to have `node` installed on your machine to run this code and run `npm install`
+The scripts available for this program are:
+
+* `npm start` => it will start the dev enviroment and will lanuch the app at `http://localhost:3000/`
+* `npm build` => it will build the app and put all the static code at `build` folder
+
+# Description
 ## Shapes
 The goal of this task is to write a simple html/JavaScript program that interacts with the user
 and draws some geometrical shapes. The program is launched by viewing `index.html` in a
