@@ -1,0 +1,7 @@
+.close {
+  color: red;
+  float: right;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+}

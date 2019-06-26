@@ -11,10 +11,11 @@ canvas {
   z-index: -1;
 }
 
-#button {
+#buttons {
   position: absolute;
   bottom: 15px;
   right: 15px;
+  display: flex;
 }
 
 #panel {

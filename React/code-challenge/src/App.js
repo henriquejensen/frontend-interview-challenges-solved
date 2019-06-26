@@ -1,38 +1,55 @@
-import React, { Component } from 'react';
-import Button from './components/button';
-import Panel from './components/panel';
+import React, { Component } from "react";
+import Button from "./components/button";
+import Panel from "./components/panel";
+import About from "./containers/about";
 
-import { pointsController, parallelogramController, circleController } from '../src/controllers';
-import { isPointSelected, areaParalellogram, diameterCircunference } from '../src/helpers';
-import { NUMBER_OF_POINTS } from '../src/constants';
-import './App.css';
+import {
+  pointsController,
+  parallelogramController,
+  circleController
+} from "../src/controllers";
+import {
+  isPointSelected,
+  areaParalellogram,
+  diameterCircunference
+} from "../src/helpers";
+import { NUMBER_OF_POINTS } from "../src/constants";
+import "./App.css";
 
 class App extends Component {
-
   state = {
     points: [],
     pointSelected: null,
     circleArea: null,
     parallelogramArea: null
-  }
+  };
 
   componentDidMount(prev) {
     this.canvas = this.refs.canvas;
-    this.context = this.canvas.getContext('2d');
-    this.CONTAINER = { x: 0, y: 0, width: this.canvas.width, height: this.canvas.height };
+    this.context = this.canvas.getContext("2d");
+    this.CONTAINER = {
+      x: 0,
+      y: 0,
+      width: this.canvas.width,
+      height: this.canvas.height
+    };
   }
 
   componentDidUpdate() {
-    this.context = this.canvas.getContext('2d');
+    this.context = this.canvas.getContext("2d");
   }
 
   initScreen = () => {
-    this.context.fillStyle = 'black';
-    this.context.fillRect(this.CONTAINER.x,this.CONTAINER.y,this.CONTAINER.width,this.CONTAINER.height);
-  }
+    this.context.fillStyle = "black";
+    this.context.fillRect(
+      this.CONTAINER.x,
+      this.CONTAINER.y,
+      this.CONTAINER.width,
+      this.CONTAINER.height
+    );
+  };
 
   handleMouseDown = ({ nativeEvent }) => {
-    
     const { offsetX: x, offsetY: y } = nativeEvent;
     const { points } = this.state;
 
@@ -43,7 +60,10 @@ class App extends Component {
     } else {
       const pointSelected = isPointSelected(x, y, points);
 
-      if (pointSelected !== null && pointSelected !== this.state.pointSelected) {
+      if (
+        pointSelected !== null &&
+        pointSelected !== this.state.pointSelected
+      ) {
         this.setState({ pointSelected });
       } else {
         this.setState({ pointSelected: null });
@@ -51,10 +71,9 @@ class App extends Component {
     }
 
     requestAnimationFrame(this.renderCanvas);
-  }
+  };
 
   handleMouseMove = ({ nativeEvent }) => {
-    
     const { offsetX: x, offsetY: y } = nativeEvent;
     const { pointSelected, points } = this.state;
 
@@ -65,27 +84,26 @@ class App extends Component {
     }
 
     requestAnimationFrame(this.renderCanvas);
-  }
+  };
 
   renderCanvas = () => {
     this.initScreen();
 
     const { points } = this.state;
     const { context } = this;
-    const [ point1, point2, point3 ] = points;
+    const [point1, point2, point3] = points;
 
     pointsController(context, points);
 
     if (points.length === NUMBER_OF_POINTS) {
-      const paralellogramArea = areaParalellogram(point1, point2, point3);
-      const circleDiameter = diameterCircunference(paralellogramArea);
+      const parallelogramArea = areaParalellogram(point1, point2, point3);
+      const circleDiameter = diameterCircunference(parallelogramArea);
       parallelogramController(context, points);
       circleController(context, points, circleDiameter);
 
-      this.setState({ circleArea: paralellogramArea, paralellogramArea });
+      this.setState({ circleArea: parallelogramArea, parallelogramArea });
     }
-    
-  }
+  };
 
   onReset = () => {
     this.setState({
@@ -95,19 +113,18 @@ class App extends Component {
       parallelogramArea: null
     });
     requestAnimationFrame(this.renderCanvas);
-  }
+  };
 
   render() {
     const { innerWidth, innerHeight } = window;
-    const { points, paralellogramArea, circleArea } = this.state;
-    const [ point1, point2, point3 ] = points; 
+    const { points, parallelogramArea, circleArea } = this.state;
+    const [point1, point2, point3] = points;
 
     return (
-      <div id='container'>
-        
-        <div id='background'>
+      <div id="container">
+        <div id="background">
           <canvas
-            ref='canvas'
+            ref="canvas"
             width={innerWidth}
             height={innerHeight}
             onMouseDown={this.handleMouseDown}
@@ -115,24 +132,21 @@ class App extends Component {
           />
         </div>
 
-        <div id='button'>
-          <Button
-            onClick={this.onReset}
-          >
-            Reset
-          </Button>
+        <div id="buttons">
+          <Button onClick={this.onReset}>Reset</Button>
+
+          <About />
         </div>
 
-        <div id='panel'>
+        <div id="panel">
           <Panel
             point1={point1}
             point2={point2}
             point3={point3}
-            paralellogramArea={paralellogramArea}
+            parallelogramArea={parallelogramArea}
             circleArea={circleArea}
           />
-        </div>       
-
+        </div>
       </div>
     );
   }
