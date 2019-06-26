@@ -45,3 +45,7 @@ export function isPointSelected(pointX, pointY, arrayPoints) {
     const pointSelected = arrayPoints.findIndex(({ x, y }) => verify(x,y))
     return pointSelected;
 }
+
+export function floatFixed(number) {
+    return parseFloat(number).toFixed(2);
+}

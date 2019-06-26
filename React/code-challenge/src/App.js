@@ -1,15 +1,19 @@
 import React, { Component } from 'react';
-import { mouseDown } from '../src/containers/canvasController';
-import { isPointSelected } from '../src/helpers';
+import Button from './components/button';
+import Panel from './components/panel';
+
+import { pointsController, parallelogramController, circleController } from '../src/controllers';
+import { isPointSelected, areaParalellogram, diameterCircunference } from '../src/helpers';
 import { NUMBER_OF_POINTS } from '../src/constants';
 import './App.css';
-import Button from './components/button';
 
 class App extends Component {
 
   state = {
     points: [],
-    pointSelected: null
+    pointSelected: null,
+    circleArea: null,
+    parallelogramArea: null
   }
 
   componentDidMount(prev) {
@@ -67,20 +71,36 @@ class App extends Component {
     this.initScreen();
 
     const { points } = this.state;
-    mouseDown(this.context, points);
+    const { context } = this;
+    const [ point1, point2, point3 ] = points;
+
+    pointsController(context, points);
+
+    if (points.length === NUMBER_OF_POINTS) {
+      const paralellogramArea = areaParalellogram(point1, point2, point3);
+      const circleDiameter = diameterCircunference(paralellogramArea);
+      parallelogramController(context, points);
+      circleController(context, points, circleDiameter);
+
+      this.setState({ circleArea: paralellogramArea, paralellogramArea });
+    }
+    
   }
 
   onReset = () => {
-    this.setState({ points: [], pointSelected: null })
+    this.setState({
+      points: [],
+      pointSelected: null,
+      circleArea: null,
+      parallelogramArea: null
+    });
     requestAnimationFrame(this.renderCanvas);
-  }
-
-  getWindowSize() {
-    return { width: 800, height: 800 }
   }
 
   render() {
     const { innerWidth, innerHeight } = window;
+    const { points, paralellogramArea, circleArea } = this.state;
+    const [ point1, point2, point3 ] = points; 
 
     return (
       <div id='container'>
@@ -102,8 +122,19 @@ class App extends Component {
             Reset
           </Button>
         </div>
+
+        <div id='panel'>
+          <Panel
+            point1={point1}
+            point2={point2}
+            point3={point3}
+            paralellogramArea={paralellogramArea}
+            circleArea={circleArea}
+          />
+        </div>       
+
       </div>
-    )
+    );
   }
 }
 

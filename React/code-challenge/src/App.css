@@ -1,15 +1,9 @@
 body {
-  background-color: grey
+  background-color: black
 }
 
 canvas {
   background-color: black
-}
-
-#container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
 #background {
@@ -21,4 +15,10 @@ canvas {
   position: absolute;
   bottom: 15px;
   right: 15px;
+}
+
+#panel {
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
 }
