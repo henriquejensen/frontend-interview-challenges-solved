@@ -8,3 +8,7 @@
 .App-content {
   display: flex
 }
+
+#car-info {
+  padding: 15px 30px
+}
