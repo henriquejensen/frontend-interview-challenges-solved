@@ -28,4 +28,4 @@ The attached mockup is to be used as a reference point. You do not need to
 implement it exactly as long as you cover the requirements above.
 Feel free to use any other libraries you think would be useful. 
 
-![Mockup](/images/mockup.png)
+![Mockup](/car-marketplace/images/mockup.png)
