@@ -2,39 +2,28 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import AlbumRow from "./components/albumRow";
-import { BORDER_COLORS, URL, ALBUMS_MOCK } from "./constants";
+import { BORDER_COLORS, URL } from "./constants";
 import { normalizeAlbums, sortAlbumsDescending } from "./helpers";
 
 import "./styles.css";
 
 class App extends React.Component {
-  state = { albums: ALBUMS_MOCK };
+  state = { albums: [] };
 
   componentDidMount() {
     fetch(URL)
-      .then(function(response) {
-        return response.json();
-      })
-      .then(function(myJson) {
-        //console.log(myJson);
-        this.setState({
-          albums: JSON.stringify(myJson)
-        });
-      });
+      .then(response => response.json())
+      .then(albums => this.setState({ albums: normalizeAlbums(albums) }));
   }
 
   render() {
     const { albums } = this.state;
-    const albumMapped = normalizeAlbums(albums);
-    const albumKeys = Object.keys(albumMapped).slice(0, 3);
+    const albumKeys = Object.keys(albums).slice(0, 3);
 
     return (
       <div className="App">
         {sortAlbumsDescending(albumKeys).map((albumId, index) => {
-          const albumSliced = sortAlbumsDescending(albumMapped[albumId]).slice(
-            0,
-            2
-          );
+          const albumSliced = sortAlbumsDescending(albums[albumId]).slice(0, 2);
           return (
             <AlbumRow
               key={albumId}

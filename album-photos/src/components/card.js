@@ -1,7 +1,7 @@
 import React from "react";
 
 export default function Card({
-  album: { thumbnailUrl, title, albumId },
+  album: { thumbnailUrl, title, albumId, url },
   borderColor = "black"
 }) {
   return (
@@ -16,7 +16,11 @@ export default function Card({
       }}
     >
       <img src={thumbnailUrl} alt={title} />
-      <p>{title}</p>
+      <p>
+        <a rel="noopener noreferrer" href={url} target="_blank">
+          {title}
+        </a>
+      </p>
     </div>
   );
 }
