@@ -1,40 +1,41 @@
 import React from "react";
+import style from "styled-components";
 
 export function Dropdown({ label, options = [], onChange }) {
   return (
-    <div style={styles.container}>
-      <label style={styles.label} htmlFor="dropdown">
-        {label}
-      </label>
-      <select name="dropdown" style={styles.select} onChange={onChange}>
+    <Container>
+      <Label htmlFor="dropdown">{label}</Label>
+      <Select name="dropdown" onChange={onChange}>
         {options.map(option => (
           <option key={option} value={option}>
             {option}
           </option>
         ))}
-      </select>
-    </div>
+      </Select>
+    </Container>
   );
 }
 
-const styles = {
-  container: {
-    display: "flex",
-    flexDirection: "column",
-    position: "relative"
-  },
-  label: {
-    position: "absolute",
-    top: -8,
-    left: 10,
-    paddingLeft: 5,
-    paddingRight: 5,
-    background: "white",
-    fontSize: 12
-  },
-  select: {
-    padding: "15px 5px 10px 5px",
-    borderRadius: 5,
-    borderWidth: 2
-  }
-};
+const Container = style("div")`
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin-top: 20px;
+  margin-bottom: 20px
+`;
+
+const Label = style("label")`
+  position: absolute;
+  top: -8px;
+  left: 10px;
+  padding-left: 5px;
+  padding-right: 5px;
+  background: white;
+  font-size: 12px
+`;
+
+const Select = style("select")`
+  padding: 15px 5px 10px 5px;
+  border-radius: 5px;
+  border-width: 2px
+`;

@@ -14,7 +14,9 @@ function App() {
     }
   }
 
-  const physicalStatus = [ 'At buyer', 'physical 1', 'physical 2' ]
+  const physicalStatus = [ 'At buyer', 'physical 1', 'physical 2' ];
+  const legalStatus = [ 'Buyer', 'legal 1', 'legal 2' ];
+  const sellerStatus = [ 'Sold', 'seller 1', 'seller 2' ];
 
   return (
     <div className="App">
@@ -23,13 +25,15 @@ function App() {
         <div id="car-info">
           <h1>{car.name}</h1>
           <div style={{ display: 'flex' }}>
-            <img src={car.img} alt={car.name} width={200} />
+            <img src={car.img} alt={car.name} height={150} />
             <div style={{ width: 250, paddingRight: 15, paddingLeft: 15 }}>
-              <h3 style={{ borderBottom: "1px solid" }}>Status</h3>
-              <Dropdown label="Physical Status" options={physicalStatus} />
+              <h3 style={{ borderBottom: "1px solid", marginTop: 0 }}>Status</h3>
+              <Dropdown label="Physical status" options={physicalStatus} />
+              <Dropdown label="Legal status" options={legalStatus} />
+              <Dropdown label="Seller status" options={sellerStatus} />
             </div>
             <div style={{ width: 250, paddingRight: 15, paddingLeft: 15 }}>
-              <h3 style={{ borderBottom: "1px solid" }}>Financial information</h3>
+              <h3 style={{ borderBottom: "1px solid", marginTop: 0 }}>Financial information</h3>
             </div>
           </div>
           
