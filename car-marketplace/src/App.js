@@ -1,4 +1,6 @@
 import React from "react";
+import { Dropdown } from './components/dropdown';
+
 import "./App.css";
 
 function App() {
@@ -12,6 +14,8 @@ function App() {
     }
   }
 
+  const physicalStatus = [ 'At buyer', 'physical 1', 'physical 2' ]
+
   return (
     <div className="App">
       <header className="App-header" />
@@ -22,6 +26,7 @@ function App() {
             <img src={car.img} alt={car.name} width={200} />
             <div style={{ width: 250, paddingRight: 15, paddingLeft: 15 }}>
               <h3 style={{ borderBottom: "1px solid" }}>Status</h3>
+              <Dropdown label="Physical Status" options={physicalStatus} />
             </div>
             <div style={{ width: 250, paddingRight: 15, paddingLeft: 15 }}>
               <h3 style={{ borderBottom: "1px solid" }}>Financial information</h3>
