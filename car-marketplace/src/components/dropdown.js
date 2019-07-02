@@ -37,5 +37,6 @@ const Label = style("label")`
 const Select = style("select")`
   padding: 15px 5px 10px 5px;
   border-radius: 5px;
-  border-width: 2px
+  border-width: 2px;
+  min-width: 180px
 `;
